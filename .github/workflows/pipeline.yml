@@ -1,8 +1,3 @@
-# Pipeline: Playwright API → Playwright E2E → K6 (Performance)
-# Ordem de execução: testes de API, depois E2E, depois performance.
-#
-# Requisitos: Repositório out-performance-k6 na mesma organização.
-
 name: Pipeline API → E2E → K6
 
 on:
