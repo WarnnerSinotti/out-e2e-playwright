@@ -1,4 +1,4 @@
-# 🎉 Bem-vindo ao Projeto de Testes E2E e API com Playwright! 💻
+# out-e2e-playwright
 
 Neste projeto, exploramos testes automatizados de **API** e **E2E (end-to-end)** usando o framework **Playwright**. A missão é garantir que as aplicações web e APIs estejam funcionando corretamente, com cenários de login, fluxos críticos e validações de endpoints REST.
 

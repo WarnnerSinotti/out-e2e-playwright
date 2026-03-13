@@ -1,4 +1,4 @@
-name: Pipeline API → E2E → K6
+name: Pipeline Completo
 
 on:
   workflow_dispatch:
