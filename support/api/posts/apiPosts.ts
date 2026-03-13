@@ -10,22 +10,22 @@ export interface PostPayload {
 }
 
 export const apiPosts = {
-  async listar(request: APIRequestContext) {
+  async BuscarPosts(request: APIRequestContext) {
     return request.get(`${baseUrl}/posts`);
   },
 
-  async buscarPorId(request: APIRequestContext, id: number) {
+  async BuscarPostsPorId(request: APIRequestContext, id: number) {
     return request.get(`${baseUrl}/posts/${id}`);
   },
 
-  async criar(request: APIRequestContext, payload: PostPayload) {
+  async CriarPost(request: APIRequestContext, payload: PostPayload) {
     return request.post(`${baseUrl}/posts`, {
       data: payload,
       headers: { "Content-type": "application/json; charset=UTF-8" },
     });
   },
 
-  async atualizar(
+  async AtualizarPost(
     request: APIRequestContext,
     id: number,
     payload: Partial<PostPayload>,
@@ -36,12 +36,12 @@ export const apiPosts = {
     });
   },
 
-  async deletar(request: APIRequestContext, id: number) {
+  async DeletarPostPorId(request: APIRequestContext, id: number) {
     return request.delete(`${baseUrl}/posts/${id}`);
   },
 
   /** Requisição com método HTTP customizado (para cenários negativos) */
-  async requisicao(
+  async CriacaoCustomizada(
     request: APIRequestContext,
     method: string,
     path: string,

@@ -1,24 +1,14 @@
 import { expect, test } from "@playwright/test";
 
+import { assertionGlobal } from "../../../assertions/global";
 import { LoginPage } from "../../../pages/login";
 
 const user: any = process.env.USUARIO;
-const password: any = process.env.SENHA;
 
 test.describe("Login E2E", () => {
   test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.Visitar();
-  });
-
-  test("Login com credenciais corretas - redireciona para área segura", async ({
-    page,
-  }) => {
-    const loginPage = new LoginPage(page);
-    await loginPage.FazerLogin(user, password);
-
-    await expect(page).toHaveURL(/\/secure$/);
-    await expect(page.locator("h2")).toContainText("Secure Area");
   });
 
   test("Login com credenciais incorretas - exibe mensagem de erro", async ({
@@ -27,7 +17,7 @@ test.describe("Login E2E", () => {
     const loginPage = new LoginPage(page);
     await loginPage.FazerLogin("usuarioInvalido", "senhaErrada");
 
-    await expect(page).toHaveURL(/\/login$/);
+    await assertionGlobal.url(page, "/login");
     await expect(loginPage.mensagemErro).toContainText(
       "Your username is invalid",
     );
@@ -39,7 +29,7 @@ test.describe("Login E2E", () => {
     const loginPage = new LoginPage(page);
     await loginPage.FazerLogin(user, "senhaErrada");
 
-    await expect(page).toHaveURL(/\/login$/);
+    await assertionGlobal.url(page, "/login");
     await expect(loginPage.mensagemErro).toContainText(
       "Your password is invalid",
     );

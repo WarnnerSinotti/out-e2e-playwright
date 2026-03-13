@@ -23,7 +23,6 @@ O **Playwright** é uma ferramenta de código aberto, moderna e poderosa para au
 
 -   **Node.js**: Para rodar o projeto, é necessário ter o [Node.js](https://nodejs.org/en/) (de preferência, versão LTS 20.x).
 -   **Git**: Utilizamos o [Git](https://git-scm.com/) para controle de versão. Recomendamos o uso do [GitHub Desktop](https://desktop.github.com/).
--   **Editor de Código**: Recomendamos o uso do [Visual Studio Code](https://code.visualstudio.com/) (VS Code) ou [Cursor](https://cursor.com/), com as extensões sugeridas abaixo.
 
 ### 1. Instalação do Playwright
 
@@ -35,7 +34,7 @@ npx playwright install
 
 ---
 
-### 2. Extensões Recomendadas para o VS Code 🔌
+### 2. Extensões Recomendadas para o VS Code - Caso utilize VS Code🔌
 
 -   [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 -   [Pretty TypeScript Errors](https://marketplace.visualstudio.com/items?itemName=yoavbls.pretty-ts-errors)
@@ -113,7 +112,7 @@ npm run playwright:Report
 
 **Quando rodar só API + E2E:** use o workflow **Playwright API + E2E** neste repositório (workflow_dispatch, push ou PR na main).
 
-**Pipeline completo (API → E2E → K6):** rodar no repositório [out-test-pipeline](https://github.com/SEU_ORG/out-test-pipeline).
+**Pipeline completo:** rodar no repositório [out-test-pipeline](https://github.com/WarnnerSinotti/out-test-pipeline/actions).
 
 ---
 
@@ -124,7 +123,7 @@ npm run playwright:Report
 | feat     | Nova funcionalidade de teste                     |
 | fix      | Correção de quebra de id ou test-id              |
 | docs     | Alterações em documentação                       |
-| config   | Alterações na configuração do Playwright        |
+| config   | Alterações na configuração do Playwright         |
 | refactor | Refatoração de código, sem nova funcionalidade   |
 
 ---

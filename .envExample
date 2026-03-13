@@ -1,15 +1,7 @@
-# ===========================================
-# E2E - Testes web (login)
-# ===========================================
-# Base URL da aplicação testada
+# E2E
 BASE_URL=https://the-internet.herokuapp.com
-
-# Credenciais válidas para login (The Internet)
 USUARIO=tomsmith
 SENHA=SuperSecretPassword!
 
-# ===========================================
-# API - Testes de API (posts)
-# ===========================================
-# URL base da API (usa JSONPlaceholder por padrão se não definido)
+# API
 API_POSTS_BASE_URL=https://jsonplaceholder.typicode.com
