@@ -39,4 +39,21 @@ export const apiPosts = {
   async deletar(request: APIRequestContext, id: number) {
     return request.delete(`${baseUrl}/posts/${id}`);
   },
+
+  /** Requisição com método HTTP customizado (para cenários negativos) */
+  async requisicao(
+    request: APIRequestContext,
+    method: string,
+    path: string,
+    body?: unknown,
+  ) {
+    const url = path.startsWith("http") ? path : `${baseUrl}${path}`;
+    return request.fetch(url, {
+      method,
+      headers: body
+        ? { "Content-type": "application/json; charset=UTF-8" }
+        : undefined,
+      data: body,
+    });
+  },
 };
