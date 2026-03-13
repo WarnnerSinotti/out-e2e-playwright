@@ -101,6 +101,20 @@ npm run playwright:Report
    ```
 2. O relatório será aberto no navegador com detalhes de cada teste, screenshots em falhas e traces.
 
+**No pipeline CI:** após a execução, baixe o artefato `playwright-api-report` ou `playwright-e2e-report` no GitHub Actions e abra o `index.html` no navegador.
+
+---
+
+### Pipeline CI/CD (GitHub Actions)
+
+| Workflow       | Descrição                                  |
+|----------------|--------------------------------------------|
+| `playwright.yml` | Rodar **apenas** testes API + E2E          |
+
+**Quando rodar só API + E2E:** use o workflow **Playwright API + E2E** neste repositório (workflow_dispatch, push ou PR na main).
+
+**Pipeline completo (API → E2E → K6):** rodar no repositório [out-test-pipeline](https://github.com/SEU_ORG/out-test-pipeline).
+
 ---
 
 ## Prefixos de Commit
