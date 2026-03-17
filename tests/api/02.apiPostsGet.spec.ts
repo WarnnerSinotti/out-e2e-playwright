@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 
+import { parsePost, parsePostArray } from "../../schemas";
 import { apiPosts } from "../../support/api/posts/apiPosts";
 
 test.describe("API Posts - GET", () => {
@@ -14,24 +15,21 @@ test.describe("API Posts - GET", () => {
     expect(contentType).toContain("application/json");
   });
 
-  test("GET /posts - validar corpo: array com posts", async ({ request }) => {
+  test("GET /posts - validar corpo: array com posts (Zod)", async ({
+    request,
+  }) => {
     const response = await apiPosts.BuscarPosts(request);
-    const body = (await response.json()) as Record<string, unknown>[];
+    const body = parsePostArray(await response.json());
     expect(Array.isArray(body)).toBe(true);
     expect(body.length).toBeGreaterThan(0);
   });
 
-  test("GET /posts - validar estrutura do post (id, title, userId)", async ({
+  test("GET /posts - validar estrutura do post (id, title, userId) via Zod", async ({
     request,
   }) => {
     const response = await apiPosts.BuscarPosts(request);
-    const body = (await response.json()) as Record<string, unknown>[];
-    const primeiroPost = body[0] as {
-      id?: number;
-      title?: string;
-      body?: string;
-      userId?: number;
-    };
+    const body = parsePostArray(await response.json());
+    const primeiroPost = body[0];
     expect(primeiroPost).toHaveProperty("id");
     expect(primeiroPost).toHaveProperty("title");
     expect(primeiroPost).toHaveProperty("body");
@@ -43,16 +41,11 @@ test.describe("API Posts - GET", () => {
     expect(response.status()).toBe(200);
   });
 
-  test("GET /posts/1 - validar corpo do post retornado", async ({
+  test("GET /posts/1 - validar corpo do post retornado (Zod)", async ({
     request,
   }) => {
     const response = await apiPosts.BuscarPostsPorId(request, 1);
-    const body = (await response.json()) as {
-      id?: number;
-      title?: string;
-      body?: string;
-      userId?: number;
-    };
+    const body = parsePost(await response.json());
     expect(body.id).toBe(1);
     expect(body.userId).toBeDefined();
     expect(body.title).toBeDefined();

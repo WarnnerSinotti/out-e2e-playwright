@@ -1,13 +1,9 @@
 import { APIRequestContext } from "@playwright/test";
 
+import type { PostPayload } from "../../../schemas";
+
 const baseUrl =
   process.env.API_POSTS_BASE_URL ?? "https://jsonplaceholder.typicode.com";
-
-export interface PostPayload {
-  title: string;
-  body: string;
-  userId?: number;
-}
 
 export const apiPosts = {
   async BuscarPosts(request: APIRequestContext) {

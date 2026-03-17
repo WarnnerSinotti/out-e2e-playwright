@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 
+import { parsePost } from "../../schemas";
 import { apiPosts } from "../../support/api/posts/apiPosts";
 
 test.describe("API Posts - POST", () => {
@@ -22,16 +23,11 @@ test.describe("API Posts - POST", () => {
     expect(contentType).toContain("application/json");
   });
 
-  test("POST /posts - validar corpo retornado com id e dados enviados", async ({
+  test("POST /posts - validar corpo retornado com id e dados enviados (Zod)", async ({
     request,
   }) => {
     const response = await apiPosts.CriarPost(request, payloadValido);
-    const body = (await response.json()) as {
-      id?: number;
-      title?: string;
-      body?: string;
-      userId?: number;
-    };
+    const body = parsePost(await response.json());
     expect(body.id).toBeDefined();
     expect(body.title).toBe(payloadValido.title);
     expect(body.body).toBe(payloadValido.body);
@@ -59,7 +55,7 @@ test.describe("API Posts - POST", () => {
     });
     expect([200, 201, 400, 422]).toContain(response.status());
     if (response.ok()) {
-      const body = (await response.json()) as Record<string, unknown>;
+      const body = parsePost(await response.json());
       expect(body).toHaveProperty("id");
     }
   });

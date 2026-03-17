@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 
+import { parsePost } from "../../schemas";
 import { apiPosts } from "../../support/api/posts/apiPosts";
 
 test.describe("API Posts - PUT", () => {
@@ -20,16 +21,11 @@ test.describe("API Posts - PUT", () => {
     expect(contentType).toContain("application/json");
   });
 
-  test("PUT /posts/1 - validar corpo retornado com dados atualizados", async ({
+  test("PUT /posts/1 - validar corpo retornado com dados atualizados (Zod)", async ({
     request,
   }) => {
     const response = await apiPosts.AtualizarPost(request, 1, payloadValido);
-    const body = (await response.json()) as {
-      id?: number;
-      title?: string;
-      body?: string;
-      userId?: number;
-    };
+    const body = parsePost(await response.json());
     expect(body.id).toBe(1);
     expect(body.title).toBe(payloadValido.title);
     expect(body.body).toBe(payloadValido.body);
